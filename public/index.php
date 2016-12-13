@@ -1,5 +1,5 @@
 <?php
-
+//error_reporting(E_ERROR | E_PARSE);
 use Zend\Mvc\Application;
 use Zend\Stdlib\ArrayUtils;
 
@@ -7,7 +7,7 @@ use Zend\Stdlib\ArrayUtils;
  * This makes our life easier when dealing with paths. Everything is relative
  * to the application root now.
  */
-chdir(dirname(__DIR__));
+//chdir(dirname(__DIR__));
 
 // Decline static file requests back to the PHP built-in webserver
 if (php_sapi_name() === 'cli-server') {

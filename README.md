@@ -2,16 +2,29 @@
 
 ## Introduction
 
-This is a technical assessment I have created for BurstSMS.
+This is a technical assessment I have created for BurstSMS, 
+Thank you for the opportunity to present myself, I hope we can work together,
 
 ## Requirements
 
 * PHP 5.6 - module curl installed
 * Composer
+* Mysql
 
 ## Library Installation
 
 run Composer update and composer update in order to install the vendors library.
+
+During composer installation, the process will ask if you need a minified version,
+you need to answer "no", after that a series of options will be available to install, 
+select ZEND-FORMS and ZEND-DB.
+
+## Database installation
+
+The system use the native Zend library called ZEND - DB.
+For secutiry reasons and to validate the amount of messages to send, I have move the 
+connection variables to the database.
+Use the file located in 'project/data/data.sql' to import it.
 
 ## Web server setup
 

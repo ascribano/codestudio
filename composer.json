@@ -18,7 +18,11 @@
         "zfcampus/zf-development-mode": "^3.0",
         "zendframework/zend-db": "^2.8.1",
         "zendframework/zend-mvc-form": "^1.0",
-        "zendframework/zend-json": "^3.0"
+        "zendframework/zend-json": "^3.0",
+        "zendframework/zend-developer-tools": "dev-master",
+        "doctrine/doctrine-module": "dev-master",
+        "doctrine/doctrine-orm-module": "dev-master",
+        "doctrine/orm": "*"
     },
     "autoload": {
         "psr-4": {
@@ -44,3 +48,4 @@
         "test": "phpunit"
     }
 }
+

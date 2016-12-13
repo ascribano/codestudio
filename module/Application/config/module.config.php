@@ -9,7 +9,6 @@ namespace Application;
 
 use Zend\Router\Http\Literal;
 use Zend\Router\Http\Segment;
-use Zend\ServiceManager\Factory\InvokableFactory;
 
 return [
     'router' => [
@@ -36,11 +35,7 @@ return [
             ],
         ],
     ],
-    'controllers' => [
-        'factories' => [
-            'Application\Controller\Index' => 'Application\Factory\IndexControllerFactory'
-        ],
-    ],
+
     'view_manager' => [
         'display_not_found_reason' => true,
         'display_exceptions'       => true,
@@ -59,5 +54,20 @@ return [
     ],
     'form_elements' => [
         'invokables' => [ 'phone' => 'Application\Form\Element\Phone' ]
+    ],
+    // Doctrine config
+    'doctrine' => [
+        'driver' => [
+            __NAMESPACE__ . '_driver' => [
+                'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
+                'cache' => 'array',
+                'paths' => [__DIR__ . '/../src/Entity']
+            ],
+            'orm_default' => [
+                'drivers' => [
+                    __NAMESPACE__ . '\Entity' => __NAMESPACE__ . '_driver'
+                ]
+            ]
+        ]
     ]
 ];

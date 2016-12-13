@@ -135,7 +135,6 @@ Class Bitly extends AbstractRestfulController
         } else {
             $url = self::bitly_oauth_api . $endpoint . "?" . http_build_query($params);
         }
-        //echo $url . "\n";
         $result = json_decode($this->bitly_get_curl($url), true);
         return $result;
     }
@@ -172,7 +171,6 @@ Class Bitly extends AbstractRestfulController
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
             $output = curl_exec($ch);
-
         } catch (Exception $e) {
         }
         return $output;

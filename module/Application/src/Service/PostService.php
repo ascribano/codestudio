@@ -8,33 +8,52 @@
 
 namespace Application\Service;
 
+
+use Interop\Container\ContainerInterface;
 use Application\Model\Bitly;
+use Doctrine\ORM\EntityManager;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Zend\Mvc\Controller\AbstractActionController;
 
-class PostService
+class PostService extends AbstractActionController
 {
-    const ACCESS_TOKEN  = 'c041ec00cdfa5cefe8bda46afaa996bb038527a4';
-    const API_KEY       = 'cddd0f7a6282d6dddbe6a3fc465b6ec4';
-    const API_SECRET    = 'apisecretkey';
-    const API_URL       = 'http://api.transmitsms.com';
+    protected $accesstoken;
+    protected $apikey;
+    protected $apisecret;
+    protected $apiurl;
+    protected $times;
 
-    public function bitlyMyURL( $longurl ){
+    public function __construct($data)
+    {
+        $this->accesstoken  = $data->accesstoken;
+        $this->apikey       = $data->apikey;
+        $this->apisecret    = $data->apisecret;
+        $this->apiurl       = $data->apiurl;
+        $this->times        = $data->times;
+    }
+
+    public function bitlyMyURL( $longurl = null ){
 
         $bitly  = new Bitly();
-        $params['access_token'] = self::ACCESS_TOKEN;
+        $params['access_token'] = $this->accesstoken;
         $params['longUrl']      = $longurl;
         return $bitly->bitly_get('shorten', $params);
 
     }
 
-    public function sendSMS($mobile, $message)
+    public function sendSMS( $mobile, $message )
     {
         $client = new \Zend\Http\Client();
-        $client->setAuth(self::API_KEY, self::API_SECRET, \Zend\Http\Client::AUTH_BASIC);
-        $client->setUri(self::API_URL.'/send-sms.json');
+        $client->setAuth($this->apikey,
+                        $this->apisecret,
+                        \Zend\Http\Client::AUTH_BASIC);
+
+        $client->setUri($this->apiurl.'/send-sms.json');
         $client->setMethod(\Zend\Http\Request::METHOD_POST);
         $client->setParameterPost(['message' => $message,
                                     'to' => $mobile]);
         return json_decode($client->send()->getContent(), true);
     }
+
 
 }
