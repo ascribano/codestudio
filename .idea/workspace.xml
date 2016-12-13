@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="93a70164-0d6a-4c53-bb40-6626bf52f7df" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/Application/src/Controller/Factory/IndexControllerFactory.php" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Application/config/module.config.php" afterPath="$PROJECT_DIR$/module/Application/config/module.config.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/index.php" afterPath="$PROJECT_DIR$/public/index.php" />
     </list>
     <ignored path="onlinebooking.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -37,7 +35,27 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="IndexControllerTest.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="web.config" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/web.config">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/public/index.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="1" column="9" selection-start-line="1" selection-start-column="9" selection-end-line="1" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="IndexControllerTest.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/module/Application/test/Controller/IndexControllerTest.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-402">
@@ -79,7 +97,6 @@
         <option value="$PROJECT_DIR$/module/Application/src/Model/Bitly.php" />
         <option value="$PROJECT_DIR$/config/autoload/doctrine.local.php" />
         <option value="$PROJECT_DIR$/config/application.config.php" />
-        <option value="$PROJECT_DIR$/public/index.php" />
         <option value="$PROJECT_DIR$/module/Application/src/Controller/Factory/PostServiceControllerFactory.php" />
         <option value="$PROJECT_DIR$/module/Application/src/Controller/Factory/IndexControllerFactory.php" />
         <option value="$PROJECT_DIR$/config/modules.config.php" />
@@ -95,6 +112,7 @@
         <option value="$PROJECT_DIR$/data/data.sql" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/module/Application/config/module.config.php" />
+        <option value="$PROJECT_DIR$/public/index.php" />
       </list>
     </option>
   </component>
@@ -594,12 +612,12 @@
       <workItem from="1481490952146" duration="13084000" />
       <workItem from="1481519870929" duration="17316000" />
       <workItem from="1481554937478" duration="5671000" />
-      <workItem from="1481561622244" duration="24293000" />
+      <workItem from="1481561622244" duration="24400000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="69562000" />
+    <option name="totallyTimeSpent" value="69669000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="731" extended-state="6" />
@@ -706,13 +724,6 @@
     <entry file="file://$PROJECT_DIR$/TODO.md" />
     <entry file="file://$PROJECT_DIR$/LICENSE.md" />
     <entry file="file://$PROJECT_DIR$/CONDUCT.md" />
-    <entry file="file://$PROJECT_DIR$/public/web.config">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/autoload/zend-developer-tools.local-development.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -805,14 +816,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
           <caret line="24" column="27" selection-start-line="24" selection-start-column="27" selection-end-line="24" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="1" column="2" selection-start-line="1" selection-start-column="2" selection-end-line="1" selection-end-column="2" />
           <folding />
         </state>
       </provider>
@@ -1038,6 +1041,22 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-402">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/web.config">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="9" selection-start-line="1" selection-start-column="9" selection-end-line="1" selection-end-column="9" />
           <folding />
         </state>
       </provider>
