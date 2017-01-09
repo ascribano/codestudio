@@ -1,0 +1,107 @@
+<?= $this->headLink()
+    ->prependStylesheet('../assets/global/plugins/fullcalendar/fullcalendar.min.css'); ?>
+
+<div class="page-wrapper-row full-height">
+    <div class="page-wrapper-middle">
+        <!-- BEGIN CONTAINER -->
+        <div class="page-container">
+            <!-- BEGIN CONTENT -->
+            <div class="page-content-wrapper">
+                <!-- BEGIN CONTENT BODY -->
+                <!-- BEGIN PAGE HEAD-->
+                <div class="page-head">
+                    <div class="container">
+                        <!-- BEGIN PAGE TITLE -->
+                        <div class="page-title">
+                            <h1>Booking
+                                <small>Get a booking for your selected Hairdressers</small>
+                            </h1>
+                        </div>
+                        <!-- END PAGE TITLE -->
+                    </div>
+                </div>
+                <!-- END PAGE HEAD-->
+                <!-- BEGIN PAGE CONTENT BODY -->
+                <div class="page-content">
+                    <div class="container">
+                        <!-- BEGIN PAGE CONTENT INNER -->
+                        <div class="page-content-inner">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="portlet light portlet-fit  calendar">
+                                        <div class="portlet-title">
+                                            <div class="caption">
+                                                <i class=" icon-layers font-green"></i>
+                                                <span class="caption-subject font-green sbold uppercase">Booking</span>
+                                            </div>
+                                        </div>
+                                        <div class="portlet-body">
+                                            <div class="row">
+                                                <div class="col-md-3 col-sm-12">
+                                                    <!-- BEGIN DRAGGABLE EVENTS PORTLET-->
+                                                    <h3 class="event-form-title margin-bottom-20">Calendar by Hairdressers</h3>
+
+                                                    <!-- List of  Hairdressers-->
+                                                    <div class="col-md-12">
+                                                        <div class="portlet green-sharp box">
+                                                            <div class="portlet-title">
+                                                                <div class="caption">
+                                                                    <img alt="" class="img-circle" src="../assets/layouts/layout3/img/avatar9.jpg">
+                                                                    <a href="<?php echo $this->url('booking'); ?>">Jhon Doe </div>
+                                                                <div class="tools">
+                                                                    <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
+                                                                    <a href="javascript:;" class="remove" data-original-title="" title=""> </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="portlet-body">
+                                                                <p>
+
+                                                                </p>
+                                                                <p> Travel - Loyalty points - Excellent reviews - Previous Jobs</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-12">
+                                                        <div class="portlet green-sharp box">
+                                                            <div class="portlet-title">
+                                                                <div class="caption">
+                                                                    <img alt="" class="img-circle" src="../assets/layouts/layout3/img/avatar9.jpg">
+                                                                    <a href="<?php echo $this->url('booking'); ?>">Dean Doe</div>
+                                                                <div class="tools">
+                                                                    <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
+                                                                    <a href="javascript:;" class="remove" data-original-title="" title=""> </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="portlet-body">
+                                                                <p>
+
+                                                                </p>
+                                                                <p> Travel - Loyalty points - Excellent reviews </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- end of list -->
+
+                                                </div>
+                                                <div class="col-md-9 col-sm-12">
+                                                    <div id="calendar" class="has-toolbar"> </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END PAGE CONTENT INNER -->
+                    </div>
+                </div>
+                <!-- END PAGE CONTENT BODY -->
+                <!-- END CONTENT BODY -->
+            </div>
+            <!-- END CONTENT -->
+
+        </div>
+        <!-- END CONTAINER -->
+    </div>
+</div>

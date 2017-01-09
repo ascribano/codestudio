@@ -33,9 +33,49 @@ return [
                     ],
                 ],
             ],
+            'customerservice' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/customerservice[/:action]',
+                    'defaults' => [
+                        'controller' => Controller\CustomerServiceController::class,
+                        'action'     => 'manager',
+                    ],
+                ],
+            ],
+            'booking' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/booking[/:action]',
+                    'defaults' => [
+                        'controller' => Controller\BookingController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
+            'find' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/find[/:action]',
+                    'defaults' => [
+                        'controller' => Controller\FindController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
         ],
     ],
+    'controllers' => [
+        'factories' => [
+            Controller\IndexController::class => Controller\Factory\IndexControllerFactory::class,
+            Controller\BookingController::class => Controller\Factory\BookingControllerFactory::class,
+            Controller\FindController::class => Controller\Factory\FindControllerFactory::class,
+        ],
+        'invokables' => array(
+            Controller\CustomerServiceController::class  => Controller\CustomerServiceController::class,
 
+        ),
+    ],
     'view_manager' => [
         'display_not_found_reason' => true,
         'display_exceptions'       => true,
@@ -54,5 +94,19 @@ return [
     ],
     'form_elements' => [
         'invokables' => [ 'phone' => 'Application\Form\Element\Phone' ]
-    ]
+    ],
+    'doctrine' => array(
+    'driver' => array(
+        __NAMESPACE__ . '_driver' => array(
+            'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
+            'cache' => 'array',
+            'paths' => array(__DIR__ . '/../src/' . __NAMESPACE__ . '/Entity')
+        ),
+        'orm_default' => array(
+            'drivers' => array(
+                __NAMESPACE__ . '\Entity' => __NAMESPACE__ . '_driver'
+            )
+        )
+    )
+)
 ];

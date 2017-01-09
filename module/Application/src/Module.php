@@ -17,36 +17,6 @@ class Module implements ConfigProviderInterface
 {
     const VERSION = '3.0.2dev';
 
-    public function getServiceConfig()
-    {
-        return [
-            'factories' => [
-                Model\UserTable::class => function($container) {
-                    $tableGateway = $container->get(Model\UserTableGateway::class);
-                    return new Model\UserTable($tableGateway);
-                },
-                Model\UserTableGateway::class => function ($container) {
-                    $dbAdapter = $container->get(AdapterInterface::class);
-                    $resultSetPrototype = new ResultSet();
-                    $resultSetPrototype->setArrayObjectPrototype(new Model\User());
-                    return new TableGateway('user', $dbAdapter, null, $resultSetPrototype);
-                },
-            ],
-        ];
-    }
-
-    public function getControllerConfig()
-    {
-        return [
-            'factories' => [
-                Controller\IndexController::class => function($container) {
-                    return new Controller\IndexController(
-                        $container->get(Model\UserTable::class)
-                    );
-                },
-            ],
-        ];
-    }
 
     public function getConfig()
     {
