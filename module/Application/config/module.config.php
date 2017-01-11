@@ -23,6 +23,26 @@ return [
                     ],
                 ],
             ],
+            'professionals' => [
+                'type' => Literal::class,
+                'options' => [
+                    'route'    => '/professionals',
+                    'defaults' => [
+                        'controller' => Controller\ProfessionalsController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
+            'dashboard' => [
+                'type' => Literal::class,
+                'options' => [
+                    'route'    => '/',
+                    'defaults' => [
+                        'controller' => Controller\IndexController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
             'application' => [
                 'type'    => Segment::class,
                 'options' => [
@@ -70,11 +90,18 @@ return [
             Controller\IndexController::class => Controller\Factory\IndexControllerFactory::class,
             Controller\BookingController::class => Controller\Factory\BookingControllerFactory::class,
             Controller\FindController::class => Controller\Factory\FindControllerFactory::class,
+            Controller\ProfessionalsController::class => Controller\Factory\ProfessionalsControllerFactory::class,
         ],
         'invokables' => array(
             Controller\CustomerServiceController::class  => Controller\CustomerServiceController::class,
 
         ),
+    ],
+    'service_manager' => [
+        'factories' => [
+            Service\PostManager::class => Service\Factory\PostManagerFactory::class,
+            Service\ProfessionalsManager::class => Service\Factory\ProfessionalsManagerFactory::class,
+        ],
     ],
     'view_manager' => [
         'display_not_found_reason' => true,
@@ -100,7 +127,7 @@ return [
         __NAMESPACE__ . '_driver' => array(
             'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
             'cache' => 'array',
-            'paths' => array(__DIR__ . '/../src/' . __NAMESPACE__ . '/Entity')
+            'paths' => array(__DIR__ . '/../src/Entity')
         ),
         'orm_default' => array(
             'drivers' => array(

@@ -1,0 +1,27 @@
+<?php
+namespace Application\Controller\Factory;
+
+use Interop\Container\ContainerInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
+use Application\Service\ProfessionalsManager;
+use Application\Controller\ProfessionalsController;
+
+/**
+ * This is the factory for IndexController. Its purpose is to instantiate the
+ * controller.
+ */
+class ProfessionalsControllerFactory implements FactoryInterface
+{
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    {
+        $entityManager = $container->get('doctrine.entitymanager.orm_default');
+        $professionalsManager = $container->get(ProfessionalsManager::class);
+        
+        // Instantiate the controller and inject dependencies
+        return new ProfessionalsController($entityManager, $professionalsManager);
+    }
+}
+
+
+
+

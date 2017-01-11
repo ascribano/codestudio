@@ -182,7 +182,7 @@ var Login = function() {
                     required: true
                 },
                 rpassword: {
-                    equalTo: "#register_password"
+                    equalTo: "#password"
                 },
 
                 tnc: {

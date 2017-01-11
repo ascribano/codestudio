@@ -2,8 +2,8 @@
 /**
  * If you need an environment-specific system or application configuration,
  * there is an example in the documentation
- * @see https://docs.zendframework.com/tutorials/advanced-config/#environment-specific-system-configuration
- * @see https://docs.zendframework.com/tutorials/advanced-config/#environment-specific-application-configuration
+ * @see http://framework.zend.com/manual/current/en/tutorials/config.advanced.html#environment-specific-system-configuration
+ * @see http://framework.zend.com/manual/current/en/tutorials/config.advanced.html#environment-specific-application-configuration
  */
 return [
     // Retrieve list of modules used in this application.
@@ -16,7 +16,7 @@ return [
         // namespace, the value of that key the specific path to that module's
         // Module class.
         'module_paths' => [
-            './module',
+            __DIR__ .'/../module',
             './vendor',
         ],
 
@@ -53,7 +53,7 @@ return [
     ],
 
     // Used to create an own service manager. May contain one or more child arrays.
-    // 'service_listener_options' => [
+    //'service_listener_options' => [
     //     [
     //         'service_manager' => $stringServiceManagerName,
     //         'config_key'      => $stringConfigKey,
@@ -64,9 +64,5 @@ return [
 
     // Initial configuration with which to seed the ServiceManager.
     // Should be compatible with Zend\ServiceManager\Config.
-    /*'service_manager' => [
-        'factories' => [
-            'Application\Controller\Index' => 'Application\Controller\Factory\IndexControllerFactory'
-        ],
-    ],*/
+    // 'service_manager' => [],
 ];
