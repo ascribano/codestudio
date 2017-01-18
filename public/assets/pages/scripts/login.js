@@ -154,7 +154,7 @@ var Login = function() {
         $('.register-form').validate({
             errorElement: 'span', //default input error message container
             errorClass: 'help-block', // default input error message class
-            focusInvalid: false, // do not focus the last invalid input
+            focusInvalid: true, // do not focus the last invalid input
             ignore: "",
             rules: {
 
@@ -165,26 +165,12 @@ var Login = function() {
                     required: true,
                     email: true
                 },
-                address: {
-                    required: true
-                },
-                city: {
-                    required: true
-                },
-                country: {
-                    required: true
-                },
-
-                username: {
-                    required: true
-                },
                 password: {
                     required: true
                 },
                 rpassword: {
                     equalTo: "#password"
                 },
-
                 tnc: {
                     required: true
                 }

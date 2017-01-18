@@ -1,0 +1,142 @@
+<style>
+
+    .cuadro1 {
+        background: url(../../img/join-image2.jpg)no-repeat;
+        background-position: 100%;
+        background-size: cover;
+        overflow: hidden;
+        border: 1px solid #EFEFEF;
+        display: table;
+        margin: 0 auto;
+        display: table;
+        height: 400px;
+    }
+    .page-content {
+        padding: 0px 0 30px;
+    }
+     .hstyle {
+         color: orangered;
+         font-weight: 400;
+         border-radius: 0;
+     }
+    .centered {
+        text-align: center;
+    }
+</style>
+
+<div class="page-wrapper-row full-height">
+    <div class="page-wrapper-middle">
+        <!-- BEGIN CONTAINER -->
+        <div class="page-container">
+            <!-- BEGIN CONTENT -->
+            <div class="page-content-wrapper">
+                <!-- BEGIN CONTENT BODY -->
+                <!-- BEGIN PAGE CONTENT BODY -->
+                <div class="page-content">
+                    <div class="container">
+                        <div class="page-content-inner">
+                            <div class="row">
+                                <div class="col-md-6 cuadro1">
+                                </div>
+                                <div class="col-md-6">
+
+                                    <h3 class="hstyle centered">Being a member of the Club <br>TheBigSalon has its rewards</h3>
+                                    <p class="centered">We <b>offer benefits</b> to enjoy. Immediate access to our <b>Loyalty program</b> and <b>discounts in our Market.</b></p>
+
+                                    <div class="col-md-12">
+
+                                        <!-- BEGIN REGISTRATION FORM -->
+                                        <?php
+                                        $form = $this->form;
+                                        $form->get('fullname')->setAttributes([
+                                            'class'=>'form-control placeholder-no-fix',
+                                            'placeholder'=>'Full Name'
+                                        ]);
+                                        $form->get('email')->setAttributes([
+                                            'class'=>'form-control placeholder-no-fix',
+                                            'placeholder'=>'Email'
+                                        ]);
+                                        $form->get('password')->setAttributes([
+                                            'class'=>'form-control placeholder-no-fix',
+                                            'placeholder'=>'Password'
+                                        ]);
+                                        $form->get('submit')->setAttributes(['class'=>'btn btn-success uppercase pull-right']);
+                                        $form->prepare();
+
+                                        ?>
+                                        <div class="login-options">
+                                            <h4>Login with</h4>
+                                            <ul class="social-icons">
+                                                <li>
+                                                    <a class="social-icon-color facebook" data-original-title="facebook" href="javascript:;"></a>
+                                                </li>
+                                                <li>
+                                                    <a class="social-icon-color twitter" data-original-title="Twitter" href="javascript:;"></a>
+                                                </li>
+                                                <li>
+                                                    <a class="social-icon-color googleplus" data-original-title="Goole Plus" href="javascript:;"></a>
+                                                </li>
+                                                <li>
+                                                    <a class="social-icon-color linkedin" data-original-title="Linkedin" href="javascript:;"></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <?= $this->form()->openTag($form); ?>
+                                        <div class="login-options">
+                                        <h4>or register with us</h4>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="form-group">
+                                                <?= $this->formLabel($form->get('fullname')); ?>
+                                                <?= $this->formElement($form->get('fullname')); ?>
+                                                <?= $this->formElementErrors($form->get('fullname')); ?>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+                                            <div class="form-group">
+                                                <?= $this->formLabel($form->get('email')); ?>
+                                                <?= $this->formElement($form->get('email')); ?>
+                                                <?= $this->formElementErrors($form->get('email')); ?>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <?= $this->formLabel($form->get('password')); ?>
+                                            <?= $this->formElement($form->get('password')); ?>
+                                            <?= $this->formElementErrors($form->get('password')); ?>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label visible-ie8 visible-ie9">Re-type Your Password</label>
+                                            <input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="Re-type Your Password" name="rpassword" /> </div>
+                                        <div class="form-group margin-top-20 margin-bottom-20">
+                                            <label class="mt-checkbox mt-checkbox-outline">
+                                                <input type="checkbox" name="tnc" /> I agree to the
+                                                <a href="javascript:;">Terms of Service </a> &
+                                                <a href="javascript:;">Privacy Policy </a>
+                                                <span></span>
+                                            </label>
+                                            <div id="register_tnc_error"> </div>
+                                        </div>
+                                        <div class="form-actions">
+                                            <button type="button" id="register-reset-btn" class="btn green btn-outline" onClick="this.form.reset()">RESET</button>
+                                            <button type="submit" id="register-submit-btn" class="btn btn-success uppercase pull-right">Submit</button>
+                                        </div>
+                                        <?= $this->form()->closeTag(); ?>
+                                        <!-- END REGISTRATION FORM -->
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END PAGE CONTENT BODY -->
+                <!-- END CONTENT BODY -->
+            </div>
+            <!-- END CONTENT -->
+        </div>
+        <!-- END CONTAINER -->
+    </div>
+</div>

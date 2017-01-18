@@ -34,7 +34,7 @@ class IndexController extends AbstractActionController
     {
         // Render the view template
         return new ViewModel([
-            'posts' => $posts
+            'posts' => @$posts
         ]);
     }
 }

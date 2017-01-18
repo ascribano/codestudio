@@ -11,7 +11,29 @@
  * file.
  */
 
+
+use Zend\Session\Storage\SessionArrayStorage;
+use Zend\Session\Validator\RemoteAddr;
+use Zend\Session\Validator\HttpUserAgent;
+
 return array(
+    // Session configuration.
+    'session_config' => [
+        'cookie_lifetime'     => 60*60*24, // Session cookie will expire in 3 hour.
+        'gc_maxlifetime'      => 60*60*24*30, // How long to store session data on server (for 1 month).
+    ],
+    // Session manager configuration.
+    'session_manager' => [
+        // Session validators (used for security).
+        'validators' => [
+            RemoteAddr::class,
+            HttpUserAgent::class,
+        ]
+    ],
+    // Session storage configuration.
+    'session_storage' => [
+        'type' => SessionArrayStorage::class
+    ],
     'db' => array(
         'driver'         => 'Pdo',
         'dsn'            => 'mysql:dbname=data;host=localhost',

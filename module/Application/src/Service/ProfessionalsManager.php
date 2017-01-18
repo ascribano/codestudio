@@ -3,9 +3,6 @@ namespace Application\Service;
 use Zend\ServiceManager\ServiceManager;
 use Zend\ServiceManager\ServiceManagerAwareInterface;
 use Application\Entity\Professionals;
-use Application\Entity\Comment;
-use Application\Entity\Tag;
-use Zend\Filter\StaticFilter;
 
 /**
  * The Professional Manager service is responsible for adding new professionals, updating

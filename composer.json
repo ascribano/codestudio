@@ -22,7 +22,10 @@
         "zendframework/zend-developer-tools": "dev-master",
         "doctrine/doctrine-module": "dev-master",
         "doctrine/doctrine-orm-module": "dev-master",
-        "doctrine/orm": "*"
+        "doctrine/orm": "*",
+        "zendframework/zend-session": "^2.7",
+        "zendframework/zend-crypt": "2.*",
+        "facebook/graph-sdk": "^5.4"
     },
     "autoload": {
         "psr-4": {
@@ -50,4 +53,3 @@
         "test": "phpunit"
     }
 }
-
