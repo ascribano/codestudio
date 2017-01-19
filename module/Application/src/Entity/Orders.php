@@ -12,6 +12,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Orders
 {
+    const ORDER_SERVICE = 1; // pass service
+    const ORDER_FIND = 2; // pass service
+    const ORDER_CONFIRMATION = 3; // pass service
+    const ORDER_CANCELED = 4; // pass service
+    const ORDER_SUCCESS = 5; // pass service
     /**
      * @var integer
      *
@@ -20,6 +25,17 @@ class Orders
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
+
+
+    /**
+     * @var \Application\Entity\Services
+     *
+     * @ORM\ManyToOne(targetEntity="Application\Entity\Users", inversedBy="users")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true)
+     * })
+     */
+    private $user;
 
     /**
      * @var string
@@ -87,7 +103,7 @@ class Orders
     /**
      * @var string
      *
-     * @ORM\Column(name="appointment_place", type="string", precision=0, scale=0, nullable=false, unique=false)
+     * @ORM\Column(name="appointment_place", type="string", precision=0, scale=0, nullable=true, unique=false)
      */
     private $appointment_place;
 
@@ -131,6 +147,30 @@ class Orders
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set user
+     *
+     * @param integer $user
+     *
+     * @return Orders
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return string
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 
     /**

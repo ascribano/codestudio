@@ -114,11 +114,11 @@ class AuthManager
                 $allow = $item['allow'];
                 if (is_array($actionList) && in_array($actionName, $actionList) ||
                     $actionList=='*') {
-                    if ($allow=='*')
+                    if ($allow=='*') {
                         return true; // Anyone is allowed to see the page.
-                    else if ($allow=='@' && $this->authService->hasIdentity()) {
+                    } else if ($allow=='@' && $this->authService->hasIdentity()) {
                         return true; // Only authenticated user is allowed to see the page.
-                    } else {                    
+                    } else {
                         return false; // Access denied.
                     }
                 }

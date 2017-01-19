@@ -108,7 +108,7 @@ $logged = false;
                                 <li class="dropdown dropdown-user dropdown-dark">
                                     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                                         <img alt="" class="img-circle" src="../assets/layouts/layout3/img/avatar9.jpg">
-                                        <span class="username username-hide-mobile"><?= $this->user[0]->getName(); ?></span>
+                                        <span class="username username-hide-mobile"><?= $this->user->getName(); ?></span>
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-default">
                                         <li>
@@ -253,6 +253,7 @@ $logged = false;
     ->appendFile($this->basePath('../assets/pages/scripts/search.min.js'))
     //->appendFile($this->basePath('../assets/pages/scripts/maps-google.min.js'))
     ->appendFile($this->basePath('../assets/pages/scripts/login.js'))
+    ->appendFile($this->basePath('../assets/pages/scripts/form-validation-md.js'))
 
     ->appendFile($this->basePath('../assets/layouts/layout3/scripts/layout.min.js'))
     ->appendFile($this->basePath('../assets/layouts/layout3/scripts/demo.min.js'))

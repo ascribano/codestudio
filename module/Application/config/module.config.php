@@ -201,12 +201,15 @@ return [
         ],
         'controllers' => [
             Controller\UsersController::class => [
-                ['actions' => ['index', 'message', 'setPassword'], 'allow' => '*'],
-                ['actions' => ['dashboard', 'welcome'], 'allow' => '@']
+                ['actions' => ['index'], 'allow' => '*'],
+                ['actions' => ['dashboard', 'welcome', 'service'], 'allow' => '@']
             ],
             Controller\IndexController::class => [
                 ['actions' => ['index'], 'allow' => '*'],
                 ['actions' => ['add', 'edit', 'view', 'changePassword'], 'allow' => '@']
+            ],
+            Controller\FindController::class => [
+                ['actions' => ['index'], 'allow' => '@']
             ],
         ]
     ],

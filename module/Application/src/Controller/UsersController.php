@@ -101,6 +101,13 @@ class UsersController extends AbstractActionController
     public function serviceAction()
     {
         $services = $this->usersManager->getServicesOffered();
+
+        if ($this->getRequest()->isPost()) {
+            $data = $this->params()->fromPost();
+            $this->usersManager->addNewOrder($data);
+            return $this->redirect()->toRoute('find');
+        }
+
         return new ViewModel(['services'=>$services]);
     }
 

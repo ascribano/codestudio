@@ -61,8 +61,13 @@
                                         <div class="portlet light portlet-fit portlet-form ">
                                             <div class="portlet-body">
                                                 <!-- BEGIN FORM-->
-                                                <form action="#" class="form-horizontal" id="form_sample_1" novalidate="novalidate">
+                                                <form action="#" class="form-horizontal" id="form_service" novalidate="novalidate" method="post">
                                                     <div class="form-body">
+
+                                                        <div class="alert alert-danger display-hide">
+                                                            <button class="close" data-close="alert"></button> You have some form errors. Please check below.
+                                                        </div>
+
                                                         <h5>Services requested <span class="required" aria-required="true">*</span> </h5>
                                                         <div class="form-group form-md-checkboxes">
 
@@ -75,7 +80,7 @@
                                                             <div class="col-md-10">
                                                                 <div class="md-checkbox-list">
                                                                     <div class="md-checkbox">
-                                                                        <input type="checkbox" name="checkboxes1[]" value="<?php echo $service->getId(); ?>" id="checkbox1_<?= $i; ?>" class="md-check">
+                                                                        <input type="checkbox" name="services[]" value="<?php echo $service->getId(); ?>" id="checkbox1_<?= $i; ?>" class="md-check">
                                                                         <label for="checkbox1_<?= $i; ?>">
                                                                             <span class="inc"></span>
                                                                             <span class="check"></span>
@@ -94,7 +99,7 @@
                                                                 <span class="required" aria-required="true">*</span>
                                                             </label>
                                                             <div class="col-md-10">
-                                                                <input type="text" class="form-control" placeholder="" name="name">
+                                                                <input type="text" class="form-control" placeholder="" name="address">
                                                                 <div class="form-control-focus"> </div>
                                                                 <span class="help-block">enter your address</span>
                                                             </div>

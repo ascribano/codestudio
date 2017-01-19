@@ -40,8 +40,8 @@ class Module implements ConfigProviderInterface
         $userManager      = $serviceManager->get('Application\Service\UsersManager');
         $authManager      = $serviceManager->get('Application\Service\AuthManager');
 
-        $viewModel = $event->getApplication()->getMvcEvent()->getViewModel();
-        $viewModel->user = $userManager->getUserInfo($authManager->getUserLogin());
+        $viewModel         = $event->getApplication()->getMvcEvent()->getViewModel();
+        $viewModel->user   = $userManager->getUserInfo($authManager->getUserLogin());
 
     }
 
@@ -61,7 +61,7 @@ class Module implements ConfigProviderInterface
         $actionName     = $event->getRouteMatch()->getParam('action', null);
 
         // Convert dash-style action name to camel-case.
-        $actionName = str_replace('-', '', lcfirst(ucwords($actionName, '-')));
+        $actionName = str_replace('-', '', lcfirst($actionName));
 
         // Get the instance of AuthManager service.
         $authManager = $event->getApplication()->getServiceManager()->get(AuthManager::class);
