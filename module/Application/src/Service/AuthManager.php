@@ -2,6 +2,9 @@
 namespace Application\Service;
 
 use Zend\Authentication\Result;
+use Application\Entity\Users;
+use Zend\Crypt\Password\Bcrypt;
+use Zend\Math\Rand;
 
 /**
  * The AuthManager service is responsible for user's login/logout and simple access 
@@ -21,6 +24,8 @@ class AuthManager
      * @var Zend\Session\SessionManager
      */
     private $sessionManager;
+
+    private $entityManager;
     
     /**
      * Contents of the 'access_filter' config key.
@@ -31,11 +36,12 @@ class AuthManager
     /**
      * Constructs the service.
      */
-    public function __construct($authService, $sessionManager, $config) 
+    public function __construct($authService, $sessionManager, $config, $entityManager)
     {
         $this->authService = $authService;
         $this->sessionManager = $sessionManager;
         $this->config = $config;
+        $this->entityManager = $entityManager;
     }
     
     /**
@@ -43,12 +49,7 @@ class AuthManager
      * to last for one month (otherwise the session expires on one hour).
      */
     public function login($email, $password, $rememberMe)
-    {   
-        // Check if user has already logged in. If so, do not allow to log in 
-        // twice.
-        //if ($this->authService->getIdentity()!=null) {
-        //    throw new \Exception('Already logged in');
-        //}
+    {
             
         // Authenticate with login/password.
         $authAdapter = $this->authService->getAdapter();
@@ -85,7 +86,28 @@ class AuthManager
     {
         return $this->authService->getIdentity();
     }
-    
+
+    public function createAdminUser(){
+
+        if(!$this->authService->getIdentity()){
+            // Check the database if there is a user with such email.
+            $users = $this->entityManager->getRepository(Users::class)
+                ->findAll();
+
+            var_dump($users);
+            if( empty($users) ){
+                $newuser = Users();
+                $newuser->setEmail(Users::ADMIN_USER);
+                $bcrypt = new Bcrypt();
+                $passwordHash = $bcrypt->create(Users::ADMIN_PASSWORD);
+                $newuser->setPassword($passwordHash);
+                $this->entityManager->persist($newuser);
+                $this->entityManager->flush();
+            }
+        }
+
+    }
+
     /**
      * This is a simple access control filter. It is able to restrict unauthorized
      * users to visit certain pages.

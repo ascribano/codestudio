@@ -41,12 +41,11 @@ class AuthController extends AbstractActionController
     /**
      * Constructor.
      */
-    public function __construct($entityManager, $authManager, $authService, $userManager)
+    public function __construct($entityManager, $authManager, $authService)
     {
         $this->entityManager = $entityManager;
         $this->authManager = $authManager;
         $this->authService = $authService;
-        $this->userManager = $userManager;
     }
     
     /**
@@ -63,19 +62,13 @@ class AuthController extends AbstractActionController
            // echo "not logged in";
         }
 
-        $this->layout()->setVariable('showmenu', false);
-
         // Retrieve the redirect URL (if passed). We will redirect the user to this
         // URL after successfull login.
         $redirectUrl = (string)$this->params()->fromQuery('redirectUrl', '');
         if (strlen($redirectUrl)>2048) {
             throw new \Exception("Too long redirectUrl argument passed");
         }
-        
-        // Check if we do not have users in database at all. If so, create 
-        // the 'Admin' user.
-        //$this->userManager->createAdminUserIfNotExists();
-        
+
         // Create login form
         $form = new LoginForm();
         $form->get('redirect_url')->setValue($redirectUrl);
@@ -85,7 +78,7 @@ class AuthController extends AbstractActionController
         
         // Check if user has submitted the form
         if ($this->getRequest()->isPost()) {
-            
+
             // Fill in the form with POST data
             $data = $this->params()->fromPost();            
             
@@ -93,14 +86,14 @@ class AuthController extends AbstractActionController
             
             // Validate form
             if($form->isValid()) {
-                
+
                 // Get filtered and validated data
                 $data = $form->getData();
                 
                 // Perform login attempt.
-                $result = $this->authManager->login($data['email'], 
+                $result = $this->authManager->login($data['user'],
                         $data['password'], $data['remember_me']);
-                
+
                 // Check result.
                 if ($result->getCode() == Result::SUCCESS) {
                     // Get redirect URL.
@@ -117,7 +110,7 @@ class AuthController extends AbstractActionController
                     // If redirect URL is provided, redirect the user to that URL;
                     // otherwise redirect to Home page.
                     if(empty($redirectUrl)) {
-                        return $this->redirect()->toRoute('dashboard');
+                        return $this->redirect()->toRoute('categories');
                     } else {
                         $this->redirect()->toUrl($redirectUrl);
                     }

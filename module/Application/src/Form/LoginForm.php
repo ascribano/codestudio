@@ -20,6 +20,7 @@ class LoginForm extends Form
      
         // Set POST method for this form
         $this->setAttribute('method', 'post');
+        $this->setAttribute('class', 'form-signin');
                 
         $this->addElements();
         $this->addInputFilter();          
@@ -33,9 +34,9 @@ class LoginForm extends Form
         // Add "email" field
         $this->add([            
             'type'  => 'text',
-            'name' => 'email',
+            'name' => 'user',
             'options' => [
-                'label' => 'Your E-mail',
+                'label' => 'User',
             ],
         ]);
         
@@ -63,16 +64,6 @@ class LoginForm extends Form
             'name' => 'redirect_url'
         ]);
 
-        // Add the CSRF field
-        $this->add([
-            'type' => 'csrf',
-            'name' => 'csrf',
-            'options' => [
-                'csrf_options' => [
-                'timeout' => 600
-                ]
-            ],
-        ]);
         
         // Add the Submit button
         $this->add([
@@ -96,17 +87,17 @@ class LoginForm extends Form
                 
         // Add input for "email" field
         $inputFilter->add([
-                'name'     => 'email',
+                'name'     => 'user',
                 'required' => true,
                 'filters'  => [
                     ['name' => 'StringTrim'],                    
-                ],                
-                'validators' => [
+                ],
+                    'validators' => [
                     [
-                        'name' => 'EmailAddress',
+                        'name'    => 'StringLength',
                         'options' => [
-                            'allow' => \Zend\Validator\Hostname::ALLOW_DNS,
-                            'useMxCheck' => false,                            
+                            'min' => 3,
+                            'max' => 64
                         ],
                     ],
                 ],

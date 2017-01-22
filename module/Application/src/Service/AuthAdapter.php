@@ -72,15 +72,6 @@ class AuthAdapter implements AdapterInterface
                 Result::FAILURE_IDENTITY_NOT_FOUND, 
                 null, 
                 ['Invalid credentials 1.']);
-        }   
-        
-        // If the user with such email exists, we need to check if it is active or retired.
-        // Do not allow retired users to log in.
-        if ($user->getStatus()==Users::STATUS_RETIRED) {
-            return new Result(
-                Result::FAILURE, 
-                null, 
-                ['User is retired.']);        
         }
         
         // Now we need to calculate hash based on user-entered password and compare

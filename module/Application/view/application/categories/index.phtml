@@ -1,0 +1,293 @@
+<div class="container">
+    <div class="page-header">
+        <h1>Categories Manager</h1>
+    </div>
+    <button type="button" class="button" id="add_category">Add category</button>
+    <div class="row">
+        <table id="example" class="display" cellspacing="0" width="100%">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th width="75%">Name</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tfoot>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+
+<div class="lightbox_bg"></div>
+
+<div class="lightbox_container">
+    <div class="lightbox_close"></div>
+    <div class="lightbox_content">
+
+        <h2>Add category</h2>
+        <form class="form add" id="form_category" data-id="" novalidate>
+            <div class="input_container">
+                <label for="name">Name: <span class="required">*</span></label>
+                <div class="field_container">
+                    <input type="text" class="text" name="name" id="name" value="" required>
+                </div>
+            </div>
+            <div class="button_container">
+                <button type="submit" id="buttonsubmit">Submit</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<div id="message_container">
+    <div id="message" class="success">
+        <p>This is a success message.</p>
+    </div>
+</div>
+
+<div id="loading_container">
+    <div id="loading_container2">
+        <div id="loading_container3">
+            <div id="loading_container4">
+                Loading, please wait...
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script>
+    $(document).ready(function() {
+        var table_category = $('#example').DataTable( {
+            "ajax": "categories/getlist",
+            "columnDefs": [ {
+                "targets": -1,
+                "data": null,
+                "defaultContent": "<button class='delete' id='buttondelete'>Delete</button> <button class='edit'>Edit</button>"
+            } ]
+        } );
+
+        $('#example')
+            .addClass('table table-striped table-bordered');
+
+        var form_category = $('#form_category');
+        form_category.validate();
+
+        // Show message
+        function show_message(message_text, message_type){
+            $('#message').html('<p>' + message_text + '</p>').attr('class', message_type);
+            $('#message_container').show();
+            if (typeof timeout_message !== 'undefined'){
+                window.clearTimeout(timeout_message);
+            }
+            timeout_message = setTimeout(function(){
+                hide_message();
+            }, 8000);
+        }
+        // Hide message
+        function hide_message(){
+            $('#message').html('').attr('class', '');
+            $('#message_container').hide();
+        }
+
+        // Show loading message
+        function show_loading_message(){
+            $('#loading_container').show();
+        }
+        // Hide loading message
+        function hide_loading_message(){
+            $('#loading_container').hide();
+        }
+
+        // Show lightbox
+        function show_lightbox(){
+            $('.lightbox_bg').show();
+            $('.lightbox_container').show();
+        }
+        // Hide lightbox
+        function hide_lightbox(){
+            $('.lightbox_bg').hide();
+            $('.lightbox_container').hide();
+        }
+        // Lightbox background
+        $(document).on('click', '.lightbox_bg', function(){
+            hide_lightbox();
+        });
+        // Lightbox close button
+        $(document).on('click', '.lightbox_close', function(){
+            hide_lightbox();
+        });
+        // Escape keyboard key
+        $(document).keyup(function(e){
+            if (e.keyCode == 27){
+                hide_lightbox();
+            }
+        });
+
+        // Hide iPad keyboard
+        function hide_ipad_keyboard(){
+            document.activeElement.blur();
+            $('input').blur();
+        }
+
+        // Add company button
+        $(document).on('click', '#add_category', function(e){
+            e.preventDefault();
+            $('.lightbox_content h2').text('Add category');
+            $('#form_category button').text('Add category');
+            $('#form_category').attr('class', 'form add');
+            $('#form_category').attr('data-id', '');
+            $('#form_category .field_container label.error').hide();
+            $('#form_category .field_container').removeClass('valid').removeClass('error');
+            $('#form_category #name').val('');
+            show_lightbox();
+        });
+
+        // Add company submit form
+        $(document).on('submit', '#form_category.add', function(e){
+            e.preventDefault();
+            // Validate form
+            if (form_category.valid() == true){
+                // Send company information to database
+                hide_ipad_keyboard();
+                hide_lightbox();
+                show_loading_message();
+                var form_data = $('#form_category').serialize();
+                var request   = $.ajax({
+                    url:          'categories/add',
+                    cache:        false,
+                    data:         form_data,
+                    dataType:     'json',
+                    contentType:  'application/json; charset=utf-8',
+                    type:         'get'
+                });
+                request.done(function(output){
+                    if (output.result == 'success'){
+                        // Reload datable
+                            table_category.ajax.reload(function(){
+                            hide_loading_message();
+                            var category_name = $('#category_name').val();
+                            show_message("Category '" + category_name + "' added successfully.", 'success');
+                            }, true);
+                    } else {
+                        hide_loading_message();
+                        show_message('Add request failed', 'error');
+                    }
+                });
+                request.fail(function(jqXHR, textStatus){
+                    hide_loading_message();
+                    show_message('Add request failed: ' + textStatus, 'error');
+                });
+            }
+        });
+
+       // Edit category button
+        $(document).on('click', '.edit', function(e) {
+            e.preventDefault();
+            // Get company information from database
+            show_loading_message();
+            var data = table_category.row($(this).parents('tr')).data();
+            if (data) {
+                $('.lightbox_content h2').text('Edit company');
+                $('#form_category button').text('Edit company');
+                $('#form_category').attr('class', 'form edit');
+                $('#form_category').attr('data-id', data[0]);
+                $('#form_category .field_container label.error').hide();
+                $('#form_category .field_container').removeClass('valid').removeClass('error');
+                $('#form_category #name').val(data[1]);
+                hide_loading_message();
+                show_lightbox();
+            }else{
+                hide_loading_message();
+                show_lightbox();
+            }
+
+        });
+
+        // Edit category submit form
+        $(document).on('click', '#buttonsubmit', function(e){
+            e.preventDefault();
+            // Validate form
+            if (form_category.valid() == true){
+                // Send company information to database
+                hide_ipad_keyboard();
+                hide_lightbox();
+                show_loading_message();
+                var id        = $('#form_category').attr('data-id');
+                var form_data = $('#form_category').serialize();
+                var request   = $.ajax({
+                    url:          'categories/edit?id=' + id,
+                    cache:        false,
+                    data:         form_data,
+                    dataType:     'json',
+                    contentType:  'application/json; charset=utf-8',
+                    type:         'get'
+                });
+                request.done(function(output){
+                    if (output.result == 'success'){
+                        // Reload datable
+                        table_category.ajax.reload(function(){
+                            hide_loading_message();
+                            hide_lightbox();
+                            var category_name = $('#category_name').val();
+                            show_message("Success", 'success');
+                        }, true);
+                    } else {
+                        hide_loading_message();
+                        show_message('Edit request failed', 'error');
+                    }
+                });
+                request.fail(function(jqXHR, textStatus){
+                    hide_loading_message();
+                    show_message('Edit request failed: ' + textStatus, 'error');
+                });
+            }
+        });
+
+        // Delete company
+        $(document).on('click', '.delete', function(e){
+            e.preventDefault();
+            var data = table_category.row($(this).parents('tr')).data();
+            var category_name = data[1];
+            if (confirm("Are you sure you want to delete '" + category_name + "'?")){
+                show_loading_message();
+                var id      = data[0];
+                var request = $.ajax({
+                    url:          'categories/delete?id=' + id,
+                    cache:        false,
+                    dataType:     'json',
+                    contentType:  'application/json; charset=utf-8',
+                    type:         'get'
+                });
+                request.done(function(output){
+                    if (output.result == 'success'){
+                        // Reload datable
+                        table_category.ajax.reload(function(){
+                            hide_loading_message();
+                            show_message("Company '" + category_name + "' deleted successfully.", 'success');
+                        }, true);
+                    } else {
+                        hide_loading_message();
+                        show_message('Delete request failed', 'error');
+                    }
+                });
+                request.fail(function(jqXHR, textStatus){
+                    hide_loading_message();
+                    show_message('Delete request failed: ' + textStatus, 'error');
+                });
+            }
+        });
+
+    });
+
+
+
+</script>

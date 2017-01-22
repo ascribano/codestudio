@@ -31,14 +31,19 @@
     </div>
     <div class="row">
         <!-- BEGIN Gallery Menu -->
-        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
+        <div class="col-xs-6 col-sm-2 sidebar-offcanvas" id="sidebar">
             <div class="list-group" id="menu">
             </div>
         </div>
         <!-- END Gallery Menu -->
         <!-- BEGIN Image Gallery -->
-        <div class="col-sm-9">
+        <div class="col-sm-6">
             <div id="flickr"></div>
+        </div>
+        <!-- END Image Gallery -->
+        <!-- BEGIN Image Gallery -->
+        <div class="col-sm-4"> <h3>Description</h3>
+            <div id="description"></div>
         </div>
         <!-- END Image Gallery -->
     </div>
@@ -47,14 +52,14 @@
 <script>
 
     (function() {
-        function Flickr() {
+        function Flickrphotoinfo() {
             this.init();
         }
 
-        Flickr.prototype = {
+        Flickrphotoinfo.prototype = {
             init: function() {
-                this.getCategories();
                 window.getPhotos = this.getPhotos;
+                this.getCategories();
                 this.getJSON();
             },
             getCategories: function(){
@@ -68,7 +73,7 @@
                 request.done(function(data){
                     $.each(data['data'], function(key, value) {
                         $('#menu')
-                            .append($("<a href='#'></a>")
+                            .append($("<a href='/?category="+value[1]+"'></a>")
                                 .attr("class","list-group-item")
                                 .text(value[1]));
                     });
@@ -77,8 +82,8 @@
                     console.log('Error');
                 });
             },
-            getJSON: function(category) {
-                var src = "https://api.flickr.com/services/rest/?text="+category+"&per_page=15&jsoncallback=getPhotos&page=1&method=flickr.photos.search&api_key=27228e1d9df091bbad7b8682f554357f&format=json";
+            getJSON: function() {
+                var src = "https://api.flickr.com/services/rest/?jsoncallback=getPhotos&page=1&method=flickr.photos.getInfo&api_key=27228e1d9df091bbad7b8682f554357f&photo_id=<?php echo $this->id; ?>&format=json";
                 var script = document.createElement( "script" );
                 script.src = src;
                 document.body.appendChild( script );
@@ -86,35 +91,23 @@
             getPhotos: function( data ) {
                 var limit = 18;
 
-                if( data && data.photos ) {
-                    var items = data.photos.photo;
+                if( data && data.photo ) {
+                    var photo = data.photo;
                     var html = "";
                     html += "<div class='images'>";
-
-                    for( var i = 0; i < items.length; ++i ) {
-                        var photo = items[i];
-                        var n = i + 1;
-                        if( n <= limit ) {
-                            var sqr = 'https://farm' + photo.farm + '.staticflickr.com/' + photo.server +
-                                '/' + photo.id + '_' + photo.secret + '_q.jpg';
-                            html += "<a href='photoinfo?id=" + photo.id + "'><img src='" + sqr + "' alt='' /></a>";
-                        }
-                    }
-
+                    var sqr = 'https://farm' + photo.farm + '.staticflickr.com/' + photo.server +
+                                '/' + photo.id + '_' + photo.secret + '_b.jpg';
+                    html += "<img src='" + sqr + "' alt='' width='400'/>";
                     html += "</div>";
 
                     document.querySelector( "#flickr" ).innerHTML = html;
+                    document.querySelector( "#description" ).innerHTML = photo.description._content;
                 }
             }
         };
 
-        $('.list-group').on('click', 'a', function(){
-            event.preventDefault();
-            Flickr.prototype.getJSON($(this).text());
-        });
-
         document.addEventListener( "DOMContentLoaded", function() {
-            var flickrFeed = new Flickr();
+            var flickrFeed = new Flickrphotoinfo();
 
         });
 

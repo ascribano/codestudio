@@ -6,13 +6,10 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * This class represents a registered user.
  * @ORM\Entity()
- * @ORM\Table(name="users")
+ * @ORM\Table(name="categories")
  */
-class Users
+class Categories
 {
-    // User status constants.
-    const ADMIN_USER        = "admin@example.com"; // Active user.
-    const ADMIN_PASSWORD    = "@nyth!ng"; // Retired user.
 
     /**
      * @var integer
@@ -26,16 +23,9 @@ class Users
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=45)
+     * @ORM\Column(name="name", type="string", length=45)
      */
-    protected $email;
-
-    /**
-     * @var string $password
-     *
-     * @ORM\Column(name="password", type="string", length=200, nullable=false)
-     */
-    protected $password;
+    protected $name;
 
     /**
      * @ORM\Column(name="date_created", type="datetime", nullable=false)
@@ -51,51 +41,25 @@ class Users
         return $this->id;
     }
 
-    /**
-     * Sets user ID. 
-     * @param int $id    
-     */
-    public function setId($id) 
-    {
-        $this->id = $id;
-    }
 
     /**
      * Returns email.     
      * @return string
      */
-    public function getEmail() 
+    public function getName()
     {
-        return $this->email;
+        return $this->name;
     }
 
     /**
      * Sets email.     
      * @param string $email
      */
-    public function setEmail($email) 
+    public function setName($name)
     {
-        $this->email = $email;
+        $this->name = $name;
     }
 
-    /**
-     * Returns password.
-     * @return string
-     */
-    public function getPassword() 
-    {
-       return $this->password; 
-    }
-    
-    /**
-     * Sets password.     
-     * @param string $password
-     */
-    public function setPassword($password) 
-    {
-        $this->password = $password;
-    }
-    
     /**
      * Returns the date of user creation.
      * @return string     
@@ -112,8 +76,7 @@ class Users
     public function setDateCreated($dateCreated)
     {
         $this->dateCreated = $dateCreated;
-    }    
-
+    }
 }
 
 
