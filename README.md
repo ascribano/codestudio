@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This is a technical assessment I have created for BurstSMS, 
+This is a technical assessment I have created for CodeStudio,
 Thank you for the opportunity to present myself, I hope we can work together,
 
 ## Requirements
@@ -21,10 +21,10 @@ select ZEND-FORMS and ZEND-DB.
 
 ## Database installation
 
-The system use the native Zend library called ZEND - DB.
-For secutiry reasons and to validate the amount of messages to send, I have move the 
-connection variables to the database.
-Use the file located in 'project/data/data.sql' to import it.
+The system use Doctrine, first create a table called "codestudio". Then run the command
+ ./vendor/bin/doctrine-module orm:schema-tool:update --force
+
+ and finally import the file located in 'project/data/Dump.sql' to create the login record.
 
 ## Web server setup
 
@@ -35,9 +35,9 @@ project and you should be ready to go! It should look something like below:
 
 ```apache
 <VirtualHost *:80>
-    ServerName burstsms.dev
-    DocumentRoot /path/to/burstsms/public
-    <Directory /path/to/burstsms/public>
+    ServerName codestudio.dev
+    DocumentRoot /path/to/codestudio/public
+    <Directory /path/to/codestudio/public>
         DirectoryIndex index.php
         AllowOverride All
         Order allow,deny
@@ -70,7 +70,7 @@ it should look something like below:
 server {
     listen       80;
     server_name  burstsms.localhost;
-    root         /path/to/burstsms/public;
+    root         /path/to/codestudio/public;
 
     location / {
         index index.php;
@@ -80,7 +80,7 @@ server {
     location @php {
         # Pass the PHP requests to FastCGI server (php-fpm) on 127.0.0.1:9000
         fastcgi_pass   127.0.0.1:9000;
-        fastcgi_param  SCRIPT_FILENAME /path/to/burstsms/public/index.php;
+        fastcgi_param  SCRIPT_FILENAME /path/to/codestudio/public/index.php;
         include fastcgi_params;
     }
 }
